@@ -11,7 +11,7 @@ public enum CoreDataError: Error {
     
     case create, fetch, read, update, delete, save, unknown
 
-    var customMessage: String {
+    public var customMessage: String {
         switch self {
         case .create:
             return "Failed to create entity"

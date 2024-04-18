@@ -1,0 +1,15 @@
+{
+  "originHash" : "f5fc8de1413ffa8243f59f0d7b5bdc33904062e57de820f1401b978166587274",
+  "pins" : [
+    {
+      "identity" : "ctcoredata",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cemtelliagaoglu/CTCoreData.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8abca2b581677079971f993b9deb56af14e45f93"
+      }
+    }
+  ],
+  "version" : 3
+}

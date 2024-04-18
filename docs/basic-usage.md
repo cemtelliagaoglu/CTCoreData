@@ -11,10 +11,17 @@
 ``` swift
 import CTCoreData
 ```
-2) Initialize the CoreData stack with the name of your .xcdatamodel:
+2) Create an instance of CoreDataManager:
 ``` swift
-let coreDataManager = CoreDataManager(storageName: "YourDataModel") 
+let coreDataManager = CoreDataManager.shared 
 ```
+3) Configure the manager with the name of your .xcdatamodel at init of where you create an instance:
+``` swift
+init() {
+    coreDataManager.configure(storageName: "YourDataModel")
+} 
+```
+
 ## Basic Operations
 
 ### Create

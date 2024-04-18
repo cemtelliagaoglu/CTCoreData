@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final public class CoreDataManager {
+open class CoreDataManager {
     // MARK: - Properties
     
     private let storageName: String
@@ -33,7 +33,7 @@ final public class CoreDataManager {
     
     //MARK: - Methods
 
-    public func create<E>(type _: E.Type, completion: @escaping ((Result<E, CoreDataError>) -> Void)) {
+    open func create<E>(type _: E.Type, completion: @escaping ((Result<E, CoreDataError>) -> Void)) {
         do {
             guard let object = NSEntityDescription.insertNewObject(forEntityName: "\(E.self)", into: context) as? E
             else {
@@ -47,7 +47,7 @@ final public class CoreDataManager {
         }
     }
 
-    public func read<E>(type _: E.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil,
+    open func read<E>(type _: E.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil,
                  completion: @escaping ((Result<[E], CoreDataError>) -> Void))
     {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "\(E.self)")
@@ -65,7 +65,7 @@ final public class CoreDataManager {
         }
     }
 
-    public func update(completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
+    open func update(completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
         do {
             try context.save()
             completion(.success(()))
@@ -74,7 +74,7 @@ final public class CoreDataManager {
         }
     }
 
-    public func delete(objects: [some NSManagedObject], completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
+    open func delete(objects: [NSManagedObject], completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
         do {
             for object in objects {
                 context.delete(object)

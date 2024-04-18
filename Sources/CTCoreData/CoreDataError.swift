@@ -9,7 +9,7 @@ import Foundation
 
 public enum CoreDataError: Error {
     
-    case create, fetch, read, update, delete, save, unknown
+    case create, fetch, read, update, delete, save, unknown, storage
 
     public var customMessage: String {
         switch self {
@@ -25,6 +25,8 @@ public enum CoreDataError: Error {
             return "Failed to delete entity"
         case .save:
             return "An error occured while saving context"
+        case .storage:
+            return "An error occured while setting up storage."
         default:
             return "Unknown core data error"
         }

@@ -11,10 +11,7 @@ import CoreData
 open class CoreDataManager {
     // MARK: - Properties
     
-    public static let shared = CoreDataManager()
-    
-    private var isConfigured = false
-    private var storageName: String?
+    open var storageName: String?
 
     private lazy var persistentContainer: NSPersistentContainer = {
         guard let storageName else {
@@ -34,13 +31,11 @@ open class CoreDataManager {
 
     // MARK: - Lifecycle
     
-    private init() {}
+    public init() {}
+    
+    public init(storageName: String) { self.storageName = storageName }
     
     //MARK: - Methods
-    
-    open func configureDataModel(storageName: String) {
-        self.storageName = storageName
-    }
 
     open func create<E>(type _: E.Type, completion: @escaping ((Result<E, CoreDataError>) -> Void)) {
         do {

@@ -1,5 +1,5 @@
 //
-//  CoreDataManager.swift
+//  CTCoreDataManager.swift
 //
 //
 //  Created by Cem Telliagaoglu on 17.04.2024.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-open class CoreDataManager {
+open class CTCoreDataManager {
     // MARK: - Properties
     
     open var storageName: String?

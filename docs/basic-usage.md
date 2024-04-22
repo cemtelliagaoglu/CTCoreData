@@ -11,14 +11,14 @@
 ``` swift
 import CTCoreData
 ```
-2) Create an instance of CoreDataManager:
+2) Create your Custom CoreDataManager by inheriting CTCoreDataManager:
 ``` swift
-let coreDataManager = CoreDataManager.shared 
+final class CoreDataManager: CTCoreData {}
 ```
-3) Configure the manager with the name of your .xcdatamodel at init of where you create an instance:
+3) Initialize the super class with the name of your .xcdatamodel at the init of your Manager:
 ``` swift
-init() {
-    coreDataManager.configure(storageName: "YourDataModel")
+override private init() {
+    super.init(storageName: "YOUR_DATA_MODEL")
 } 
 ```
 

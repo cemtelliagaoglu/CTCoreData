@@ -26,20 +26,13 @@ final class HomeInteractor: HomePresenterToInteractor {
     //MARK: - Lifecycle
     
     init() {
-        coreDataManager.configureDataModel(storageName: "DataModel")
         isAscending = UserDefaults.standard.object(forKey: "isAscending") as? Bool ?? true
     }
     
     //MARK: - Methods
     
     func fetchContacts(by searchText: String?) {
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: isAscending)
-        var predicate: NSPredicate? = nil
-        if let searchText,
-           !searchText.isEmpty {
-            predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText)
-        }
-        coreDataManager.read(type: Person.self, predicate: predicate, sortDescriptors: [sortDescriptor]) { [weak self] result in
+        coreDataManager.fetchContacts(by: searchText, isAscending: isAscending) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(contacts):

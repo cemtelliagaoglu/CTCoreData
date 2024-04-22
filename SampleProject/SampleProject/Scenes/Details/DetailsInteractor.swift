@@ -22,29 +22,14 @@ final class DetailsInteractor: DetailsPresenterToInteractor {
     
     private let coreDataManager = CoreDataManager.shared
     
-    //MARK: - Lifecycle
-    
-    init() {
-        coreDataManager.configureDataModel(storageName: "DataModel")
-    }
-    
     //MARK: - Methods
     
     func createNewContact(name: String, number: String) {
-        coreDataManager.create(type: Person.self) { [weak self] result in
+        coreDataManager.createNewContact(name: name, number: number) { [weak self] result in
             guard let self else { return }
             switch result {
-            case let .success(person):
-                person.name = name
-                person.number = number
-                self.coreDataManager.update { updateResult in
-                    switch updateResult {
-                    case .success:
-                        self.presenter?.savedContactSuccessfully()
-                    case let .failure(error):
-                        self.presenter?.presentError(error.customMessage)
-                    }
-                }
+            case .success:
+                self.presenter?.savedContactSuccessfully()
             case let .failure(error):
                 self.presenter?.presentError(error.customMessage)
             }

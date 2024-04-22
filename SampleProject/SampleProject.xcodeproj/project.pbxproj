@@ -24,6 +24,7 @@
 		840C84812BD090A5009D1129 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C84802BD090A5009D1129 /* DetailsPresenter.swift */; };
 		840C84832BD090AF009D1129 /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C84822BD090AF009D1129 /* DetailsInteractor.swift */; };
 		840C84852BD090B3009D1129 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C84842BD090B3009D1129 /* DetailsRouter.swift */; };
+		847361AA2BD6884C000875F1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847361A92BD6884C000875F1 /* CoreDataManager.swift */; };
 		84C899E12BD0F8A100488321 /* CTCoreData in Frameworks */ = {isa = PBXBuildFile; productRef = 84C899E02BD0F8A100488321 /* CTCoreData */; };
 		84C899E62BD10B9F00488321 /* CTCoreData in Frameworks */ = {isa = PBXBuildFile; productRef = 84C899E52BD10B9F00488321 /* CTCoreData */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		840C84802BD090A5009D1129 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		840C84822BD090AF009D1129 /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		840C84842BD090B3009D1129 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
+		847361A92BD6884C000875F1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 		840C846E2BD08390009D1129 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				847361A92BD6884C000875F1 /* CoreDataManager.swift */,
 				840C846A2BD08385009D1129 /* DataModel.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -260,6 +263,7 @@
 				840C844F2BD07F25009D1129 /* SceneDelegate.swift in Sources */,
 				840C84662BD07FBE009D1129 /* HomeInteractor.swift in Sources */,
 				840C84642BD07FB4009D1129 /* HomePresenter.swift in Sources */,
+				847361AA2BD6884C000875F1 /* CoreDataManager.swift in Sources */,
 				840C847F2BD090A0009D1129 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

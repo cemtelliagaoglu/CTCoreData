@@ -13,7 +13,7 @@ import CTCoreData
 ```
 2) Create your Custom CoreDataManager by inheriting CTCoreDataManager:
 ``` swift
-final class CoreDataManager: CTCoreData {}
+final class CoreDataManager: CTCoreDataManager {}
 ```
 3) Initialize the super class with the name of your .xcdatamodel at the init of your Manager:
 ``` swift

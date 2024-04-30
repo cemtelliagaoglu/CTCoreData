@@ -9,8 +9,8 @@
 "error_create" = "Nesne oluşturulamadı";
 "error_fetch" = "Nesne alınamadı";
 "error_read" = "Nesne okunamadı";
-"error_update" = "Bağlam güncellenemedi";
+"error_update" = "İçerik güncellenemedi";
 "error_delete" = "Nesne silinemedi";
-"error_save" = "Bağlam kaydedilirken bir hata oluştu";
+"error_save" = "İçerik kaydedilirken bir hata oluştu";
 "error_storage" = "Depolama kurulurken bir hata oluştu";
 "error_unknown" = "Bilinmeyen core data hatası";

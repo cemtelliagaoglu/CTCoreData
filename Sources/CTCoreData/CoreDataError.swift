@@ -32,3 +32,26 @@ public enum CoreDataError: Error {
         }
     }
 }
+
+extension CoreDataError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .create:
+            return NSLocalizedString("error_create", bundle: .module, comment: "Create Error")
+        case .fetch:
+            return NSLocalizedString("error_fetch", bundle: .module, comment: "Fetch Error")
+        case .read:
+            return NSLocalizedString("error_read", bundle: .module, comment: "Read Error")
+        case .update:
+            return NSLocalizedString("error_update", bundle: .module, comment: "Update Error")
+        case .delete:
+            return NSLocalizedString("error_delete", bundle: .module, comment: "Delete Error")
+        case .save:
+            return NSLocalizedString("error_save", bundle: .module, comment: "Save Error")
+        case .unknown:
+            return NSLocalizedString("error_unknown", bundle: .module, comment: "Unknown Error")
+        case .storage:
+            return NSLocalizedString("error_storage", bundle: .module, comment: "Storage Error")
+        }
+    }
+}

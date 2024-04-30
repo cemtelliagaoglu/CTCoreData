@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Cem Telliagaoglu on 30.04.2024.
+  
+*/
+
+"error_create" = "Nesne oluşturulamadı";
+"error_fetch" = "Nesne alınamadı";
+"error_read" = "Nesne okunamadı";
+"error_update" = "Bağlam güncellenemedi";
+"error_delete" = "Nesne silinemedi";
+"error_save" = "Bağlam kaydedilirken bir hata oluştu";
+"error_storage" = "Depolama kurulurken bir hata oluştu";
+"error_unknown" = "Bilinmeyen core data hatası";

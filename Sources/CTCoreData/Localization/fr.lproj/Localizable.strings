@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Cem Telliagaoglu on 30.04.2024.
+  
+*/
+
+"error_create" = "Impossible de créer l'objet";
+"error_fetch" = "Impossible de récupérer l'objet";
+"error_read" = "Impossible de lire l'objet";
+"error_update" = "Impossible de mettre à jour le contexte";
+"error_delete" = "Impossible de supprimer l'objet";
+"error_save" = "Une erreur est survenue lors de la sauvegarde du contexte";
+"error_storage" = "Une erreur est survenue lors de la configuration du stockage";
+"error_unknown" = "Erreur Core Data inconnue";

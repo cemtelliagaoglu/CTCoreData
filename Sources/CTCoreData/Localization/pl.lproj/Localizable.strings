@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Cem Telliagaoglu on 30.04.2024.
+  
+*/
+
+"error_create" = "Nie udało się utworzyć obiektu";
+"error_fetch" = "Nie udało się pobrać obiektu";
+"error_read" = "Nie udało się odczytać obiektu";
+"error_update" = "Nie udało się zaktualizować kontekstu";
+"error_delete" = "Nie udało się usunąć obiektu";
+"error_save" = "Wystąpił błąd podczas zapisywania kontekstu";
+"error_storage" = "Wystąpił błąd podczas konfigurowania przechowywania";
+"error_unknown" = "Nieznany błąd Core Data";

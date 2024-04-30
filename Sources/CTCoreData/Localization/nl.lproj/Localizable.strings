@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Cem Telliagaoglu on 30.04.2024.
+  
+*/
+
+"error_create" = "Kan object niet maken";
+"error_fetch" = "Kan object niet ophalen";
+"error_read" = "Kan object niet lezen";
+"error_update" = "Kan context niet bijwerken";
+"error_delete" = "Kan object niet verwijderen";
+"error_save" = "Er is een fout opgetreden bij het opslaan van de context";
+"error_storage" = "Er is een fout opgetreden bij het instellen van de opslag";
+"error_unknown" = "Onbekende Core Data-fout";

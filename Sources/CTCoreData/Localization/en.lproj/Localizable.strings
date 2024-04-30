@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Cem Telliagaoglu on 30.04.2024.
+  
+*/
+
+"error_create" = "Failed to create entity";
+"error_fetch" = "Failed to fetch entity";
+"error_read" = "Couldn't read entity";
+"error_update" = "Failed to update context";
+"error_delete" = "Failed to delete entity";
+"error_save" = "An error occured while saving context";
+"error_storage" = "An error occured while setting up storage";
+"error_unknown" = "Unknown core data error";

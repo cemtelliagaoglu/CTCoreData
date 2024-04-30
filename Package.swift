@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "CTCoreData",
+    defaultLocalization: "en",
     products: [
         .library(
             name: "CTCoreData",

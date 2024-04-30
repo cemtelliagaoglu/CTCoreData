@@ -50,6 +50,19 @@ open class CTCoreDataManager {
             completion(.failure(.save))
         }
     }
+    
+    open func create<E>(type _: E.Type) async throws -> E {
+        do {
+            guard let object = NSEntityDescription.insertNewObject(forEntityName: "\(E.self)", into: context) as? E
+            else {
+                throw CoreDataError.create
+            }
+            try context.save()
+            return object
+        } catch {
+            throw CoreDataError.save
+        }
+    }
 
     open func read<E>(type _: E.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil,
                  completion: @escaping ((Result<[E], CoreDataError>) -> Void))
@@ -68,6 +81,25 @@ open class CTCoreDataManager {
             completion(.failure(.read))
         }
     }
+    
+    open func read<E>(
+        type _: E.Type,
+        predicate: NSPredicate? = nil,
+        sortDescriptors: [NSSortDescriptor]? = nil
+    ) async throws -> [E] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "\(E.self)")
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = sortDescriptors
+        do {
+            guard let objects = try context.fetch(fetchRequest) as? [E]
+            else {
+                throw CoreDataError.fetch
+            }
+            return objects
+        } catch {
+            throw CoreDataError.read
+        }
+    }
 
     open func update(completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
         do {
@@ -75,6 +107,14 @@ open class CTCoreDataManager {
             completion(.success(()))
         } catch {
             completion(.failure(.update))
+        }
+    }
+    
+    open func update() async throws {
+        do {
+            try context.save()
+        } catch {
+            throw CoreDataError.update
         }
     }
 
@@ -91,6 +131,20 @@ open class CTCoreDataManager {
             completion(.success(()))
         } catch {
             completion(.failure(.delete))
+        }
+    }
+    
+    open func delete(objects: [NSManagedObject]) async throws {
+        do {
+            for object in objects {
+                guard object.managedObjectContext == context else {
+                    throw CoreDataError.storage
+                }
+                context.delete(object)
+            }
+            try context.save()
+        } catch {
+            throw CoreDataError.delete
         }
     }
     

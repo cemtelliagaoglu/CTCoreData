@@ -36,8 +36,28 @@ open class CTCoreDataManager {
     public init(storageName: String) { self.storageName = storageName }
     
     //MARK: - Methods
+    
+    private func displayError(_ error: CoreDataError) {
+        let alert = UIAlertController(title: "Error", message: error.customMessage, preferredStyle: .alert)
+        alert.addAction(.init(title: "Close", style: .cancel))
+        if #available(iOS 13.0, *) {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                windowScene.windows.first?.rootViewController?.present(alert, animated: true)
+            }
+        } else {
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+        }
+    }
+}
 
-    open func create<E>(type _: E.Type, completion: @escaping ((Result<E, CoreDataError>) -> Void)) {
+//MARK: - CTCoreDataManagable
+
+extension CTCoreDataManager: CTCoreDataManagable {
+    
+    public func create<E: NSManagedObject>(
+        type _: E.Type,
+        completion: @escaping ((Result<E, CoreDataError>) -> Void)
+    ) {
         do {
             guard let object = NSEntityDescription.insertNewObject(forEntityName: "\(E.self)", into: context) as? E
             else {
@@ -50,23 +70,13 @@ open class CTCoreDataManager {
             completion(.failure(.save))
         }
     }
-    
-    open func create<E>(type _: E.Type) async throws -> E {
-        do {
-            guard let object = NSEntityDescription.insertNewObject(forEntityName: "\(E.self)", into: context) as? E
-            else {
-                throw CoreDataError.create
-            }
-            try context.save()
-            return object
-        } catch {
-            throw CoreDataError.save
-        }
-    }
 
-    open func read<E>(type _: E.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil,
-                 completion: @escaping ((Result<[E], CoreDataError>) -> Void))
-    {
+    public func read<E: NSManagedObject>(
+        type _: E.Type,
+        predicate: NSPredicate? = nil,
+        sortDescriptors: [NSSortDescriptor]? = nil,
+        completion: @escaping ((Result<[E], CoreDataError>) -> Void)
+    ) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "\(E.self)")
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortDescriptors
@@ -81,8 +91,59 @@ open class CTCoreDataManager {
             completion(.failure(.read))
         }
     }
-    
-    open func read<E>(
+
+    public func update(
+        completion: @escaping ((Result<Void, CoreDataError>) -> Void)
+    ) {
+        do {
+            try context.save()
+            completion(.success(()))
+        } catch {
+            completion(.failure(.update))
+        }
+    }
+
+    public func delete(
+        objects: [NSManagedObject],
+        completion: @escaping ((Result<Void, CoreDataError>) -> Void)
+    ) {
+        do {
+            for object in objects {
+                guard object.managedObjectContext == context else {
+                    completion(.failure(.storage))
+                    return
+                }
+                context.delete(object)
+            }
+            try context.save()
+            completion(.success(()))
+        } catch {
+            completion(.failure(.delete))
+        }
+    }
+}
+
+//MARK: - async/await methods
+
+@available(iOS 13, *)
+extension CTCoreDataManager {
+
+    public func create<E>(
+        type _: E.Type
+    ) async throws -> E {
+        do {
+            guard let object = NSEntityDescription.insertNewObject(forEntityName: "\(E.self)", into: context) as? E
+            else {
+                throw CoreDataError.create
+            }
+            try context.save()
+            return object
+        } catch {
+            throw CoreDataError.save
+        }
+    }
+
+    public func read<E>(
         type _: E.Type,
         predicate: NSPredicate? = nil,
         sortDescriptors: [NSSortDescriptor]? = nil
@@ -101,16 +162,7 @@ open class CTCoreDataManager {
         }
     }
 
-    open func update(completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
-        do {
-            try context.save()
-            completion(.success(()))
-        } catch {
-            completion(.failure(.update))
-        }
-    }
-    
-    open func update() async throws {
+    public func update() async throws {
         do {
             try context.save()
         } catch {
@@ -118,23 +170,7 @@ open class CTCoreDataManager {
         }
     }
 
-    open func delete(objects: [NSManagedObject], completion: @escaping ((Result<Void, CoreDataError>) -> Void)) {
-        do {
-            for object in objects {
-                guard object.managedObjectContext == context else {
-                    completion(.failure(.storage))
-                    return
-                }
-                context.delete(object)
-            }
-            try context.save()
-            completion(.success(()))
-        } catch {
-            completion(.failure(.delete))
-        }
-    }
-    
-    open func delete(objects: [NSManagedObject]) async throws {
+    public func delete(objects: [NSManagedObject]) async throws {
         do {
             for object in objects {
                 guard object.managedObjectContext == context else {
@@ -145,18 +181,6 @@ open class CTCoreDataManager {
             try context.save()
         } catch {
             throw CoreDataError.delete
-        }
-    }
-    
-    private func displayError(_ error: CoreDataError) {
-        let alert = UIAlertController(title: "Error", message: error.customMessage, preferredStyle: .alert)
-        alert.addAction(.init(title: "Close", style: .cancel))
-        if #available(iOS 13.0, *) {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                windowScene.windows.first?.rootViewController?.present(alert, animated: true)
-            }
-        } else {
-            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
         }
     }
 }
